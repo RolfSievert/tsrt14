@@ -34,6 +34,36 @@ end
 
 %% 7.2.2 Signal modeling
 clear all;
+M=8;    %#Microphones/sensors in the SN
+
+%% Load real data
+load realrun;
+N_samples=length(tphat);    %#Samples in the calibration data
+e_r=zeros(N_samples,M);   %Allocate memory
+
+tphat_bar=mean(tphat,2);    %Mean of the calibration data
+
+%Measurement errors of the calibration data for each sensor
+%(measurement noise)
+for i=1:M
+    e_r(:,i)=tphat(:,i)-tphat_bar;
+end
+
+%% Load bad run
+load badrun;
+N_samples=length(tphat);    %#Samples in the calibration data
+e_b=zeros(N_samples,M);   %Allocate memory
+
+tphat_bar=mean(tphat,2);    %Mean of the calibration data
+
+%Measurement errors of the calibration data for each sensor
+%(measurement noise)
+for i=1:M
+    e_b(:,i)=tphat(:,i)-tphat_bar;
+end
+
+%% Create tdoa network
+clc;
 %Micophone positions in setup 1
 th_1=[0 0.29 0 0.87 0.44 0.98 0.96 0.73 1.24 0.45 1.15 0.01 0.45 -0.085 ...
     0.25 0.02];
@@ -47,12 +77,23 @@ M=8;    %#Microphones/sensors in the SN
 N=1;    %#Targets (1 robot)
 
 %2D TDOA as range differences for configuration 1
-stdoa_1=exsensor('tdoa2',M,N,nx);    %Create TDOA network object
+stdoa_1=sensormod('tdoa2',M,N,nx);    %Create TDOA network object
 stdoa_1.x0=x0;
 stdoa_1.th=th_1;
+tmp=ndist(mean(e_r(:,i)),var(e_r(:,i)));
+tmp
+stdoa_1.pe=tmp;
 
 %2D TDOA as range differences for configuration 2
 stdoa_2=exsensor('tdoa2',M,N,nx);    %Create TDOA network object
 stdoa_2.x0=x0;
 stdoa_2.th=th_2;
+stdoa_1.pe=mean(e_b, 1)*eye(M);
 
+%% 
+
+clear all;
+s=exsensor('tdoa2',2,1,2,);
+s.x0=[1 1];
+s.th=[1 2 1 3];
+s.pe=0.001*eye(2);
