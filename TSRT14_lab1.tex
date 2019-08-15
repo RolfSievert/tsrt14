@@ -1,0 +1,92 @@
+\documentclass[10pt,a4paper]{report}
+
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern} 
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{float}
+\usepackage{url}
+\usepackage[top=4cm,bottom=4cm,left=4cm,right=4cm]{geometry}
+\usepackage{listings}
+\usepackage{acro}
+
+
+\lstset{extendedchars=\true}
+\lstset{inputencoding=ansinew}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{
+  title=\lstname,
+  frame=t,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  showstringspaces=false,
+  tabsize=2,
+  language=Matlab,
+  xleftmargin=-1cm
+}
+
+
+\acsetup{list-style=tabular,only-used=false,sort=false}
+
+
+\renewcommand{\thesection}{\arabic{section}}
+
+
+\DeclareAcronym{SN}{
+    short = SN,
+    long  = Sensor Network
+}
+\DeclareAcronym{TOA}{
+    short = TOA,
+    long  = Time Of Arrival
+}
+\DeclareAcronym{TDOA}{
+    short = TDOA,
+    long  = Time Difference Of Arrival
+}
+
+
+\title{Localization Using a Microphone Network\\
+Sensor Fusion, TSRT14}
+\author{Group}
+\date{\today}
+
+
+\begin{document}
+
+\maketitle
+
+\abstract{This is a lab report of the first laboration in the course Sensor Fusion, TSRT14, given at Linköping University. The aim of the laboration is to track an autonomous robot that is follwing a planar closed loop track.
+
+The robot is repeatedly emmeting short sound pulses while its moving, where the profile of the sound pulses is known. A sensor network (SN), consisting of eight microhpones, are placed around the track in order to detect the emitted sound pulses. Recorded data from the microphones are preprocessed (by provided MATLAB functions) and time of arrival (TOA) meassurements is obtained. Different algortihms are applied on the TOA measurements for localizing the robot and then analysed and compared to eachother.}
+
+\tableofcontents
+\thispagestyle{empty}
+\listoffigures
+\thispagestyle{empty}
+\newpage
+\printacronyms
+\thispagestyle{empty}
+\newpage 
+\setcounter{page}{1}
+
+
+\section{Data gathering}
+Three different data sets are recorded under three different configurations respectively. One data set is for callibrating the microphones and the other two are individually used for localizing the robot and compared to eachother. All the data sets are recorded under 45 s, with ... (descrp. of the hardware).
+
+For the data recorded for callibration the microphones and the robot is placed according to figure x. Here the robot is standing still emmits the sound pulses. This particular configuration is used to reassure that the speaker on the robot is facing all the microphones.
+
+The two data sets for localizing the robot are recorded while the robot is moving along the track, simultaneously emitting the sound pulses. See the two different configurations of the SN in figure x below.
+
+\section{Localization}
+
+
+\end{document}

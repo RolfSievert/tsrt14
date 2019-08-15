@@ -1,1 +1,4 @@
-SFlab1/
+SFlab2/
+*.mat
+*~
+toolbox/
